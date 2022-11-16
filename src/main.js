@@ -19,9 +19,22 @@ function removeLoading() {
   text.remove(father);
 }
 
+async function verifyFetch() {
+  try {
+    const produtos = await fetchProductsList('computador');
+    return produtos;
+  } catch (e) {
+    const text = 'Algum erro ocorreu, recarregue a página e tente novamente';
+    const child = document.createElement('h1');
+    child.setAttribute('class', 'error');
+    child.innerText = text;
+    father.appendChild(child);
+  }
+}
+
 async function createProducts() {
   createLoading();
-  const produtos = await fetchProductsList('computador');
+  const produtos = await verifyFetch();
   removeLoading();
   produtos.forEach((produto) => {
     const obj = {
