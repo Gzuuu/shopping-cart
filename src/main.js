@@ -1,4 +1,4 @@
-import { saveCartID } from './helpers/cartFunctions';
+import { getSavedCartIDs, saveCartID } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
@@ -65,3 +65,14 @@ async function setID() {
 }
 
 setID();
+
+window.onload = function () {
+  const productsId = getSavedCartIDs();
+  const products = productsId.map(async (product) => fetchProduct(product));
+  Promise.all(products).then((data) => {
+    data.forEach((product) => {
+      const addToStorage = createCartProductElement(product);
+      storageFather.appendChild(addToStorage);
+    });
+  });
+};
