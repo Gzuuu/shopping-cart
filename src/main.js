@@ -37,13 +37,13 @@ async function createProducts() {
   const produtos = await verifyFetch();
   removeLoading();
   produtos.forEach((produto) => {
-    const obj = {
+    const produtoProperty = {
       id: produto.id,
       title: produto.title,
       thumbnail: produto.thumbnail,
       price: produto.price,
     };
-    father.appendChild(createProductElement(obj));
+    father.appendChild(createProductElement(produtoProperty));
   });
 }
 

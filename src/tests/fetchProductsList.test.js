@@ -11,8 +11,8 @@ describe('Teste a função fetchProductsList', () => {
   });
 
   it('fetch é chamado ao executar fetchProductsList', () => {
-    const result = fetch('');
-    expect(fetchProductsList('computador')).toEqual(result)
+    fetchProductsList('computador')
+    expect(fetch).toHaveBeenCalledTimes(1)
   });
 
   it('fetch é chamado com o endpoint correto ao executar fetchProductsList', async () => {
